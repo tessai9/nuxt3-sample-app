@@ -13,6 +13,9 @@
       {{sendRequestButtonMessage}}
     </button>
     <p>Message: {{state.message}}</p>
+    <button @click="withHeader">
+      {{withHeaderButtonMessage}}
+    </button>
   </div>
 </template>
 
@@ -22,6 +25,7 @@
   const countUpButtonMessage = "count up";
   const sendRequestButtonMessage = "send request";
   const updateAllButtonMessage = "update all";
+  const withHeaderButtonMessage = "request with header";
   const state = reactive({
     count: 0,
     message: '',
@@ -40,5 +44,13 @@
 
   const upCount = () => {
     state.count++;
+  }
+
+  const withHeader = async () => {
+    const res = await $fetch('/api/message', {
+      headers: {
+        X_API_KEY: 'tesao_client_api_key',
+      }
+    });
   }
 </script>
