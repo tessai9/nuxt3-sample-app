@@ -4,16 +4,16 @@ WORKDIR /app
 
 COPY . /app
 
-RUN apt update \
+RUN apt-get update \
     && yarn install \
     && yarn run nuxt build
 
 FROM node:17.1.0-slim
 
+ENV NUXT_HOST=0.0.0.0
+
 WORKDIR /nuxt
 
-COPY --from=builder /app/.output /nuxt
+COPY --from=builder /app/.output /nuxt/.output
 
-EXPOSE 3000
-
-CMD node /nuxt/server/index.mjs
+CMD node .output/server/index.mjs

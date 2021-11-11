@@ -9,3 +9,6 @@ indent_size=2
 
 [Dockerfile]
 indent_size=4
+
+[*.conf]
+indent_size=4
